@@ -1,0 +1,159 @@
+$black: #000;
+$white: #fff;
+$grey: rgb(193, 193, 193);
+
+$cell-size: 100px;
+$mark-size: calc($cell-size * 0.9);
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    .board {
+        width: 100vh;
+        height: 100vh;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
+        grid-template-columns: repeat(3, auto);
+
+        .cell {
+            width: $cell-size;
+            height: $cell-size;
+            border: 1px solid $black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cell:first-child,
+        .cell:nth-child(2),
+        .cell:nth-child(3) {
+            border-top: none;
+        }
+        .cell:nth-child(3n + 1) {
+            border-left: none;
+        }
+        .cell:nth-child(3n + 3) {
+            border-right: none;
+        }
+        .cell:last-child,
+        .cell:nth-child(7),
+        .cell:nth-child(8) {
+            border-bottom: none;
+        }
+
+        //X
+        .cell.x::before,
+        .cell.x::after {
+            content: "";
+            position: absolute;
+            width: calc($mark-size * 0.15);
+            height: $mark-size;
+            background-color: $black;
+        }
+        .cell.x::before {
+            transform: rotate(45deg);
+        }
+        .cell.x::after {
+            transform: rotate(-45deg);
+        }
+
+        //Circle
+        .cell.circle::before,
+        .cell.circle::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+        }
+        .cell.circle::before {
+            width: $mark-size;
+            height: $mark-size;
+            background-color: $black;
+        }
+        .cell.circle::after {
+            width: calc($mark-size * 0.7);
+            height: calc($mark-size * 0.7);
+            background-color: $white;
+        }
+        //x or circle not allowed
+        .cell.x,
+        .cell.circle {
+            cursor: not-allowed;
+        }
+    }
+
+    //for space X cell
+    .board.x .cell:not(.x):not(.circle):hover::before,
+    .board.x .cell:not(.x):not(.circle):hover::after {
+        content: "";
+        position: absolute;
+        width: calc($mark-size * 0.15);
+        height: $mark-size;
+        background-color: $grey;
+    }
+    .board.x .cell:not(.x):not(.circle):hover::before {
+        transform: rotate(45deg);
+    }
+    .board.x .cell:not(.x):not(.circle):hover::after {
+        transform: rotate(-45deg);
+    }
+
+    //for space Circle cell
+    .board.circle .cell:not(.x):not(.circle):hover::before,
+    .board.circle .cell:not(.x):not(.circle):hover::after  {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+    }
+    .board.circle .cell:not(.x):not(.circle):hover::before {
+        width: $mark-size;
+        height: $mark-size;
+        background-color: $grey;
+    }
+    .board.circle .cell:not(.x):not(.circle):hover::after {
+        width: calc($mark-size * 0.7);
+        height: calc($mark-size * 0.7);
+        background-color: $white;
+    }
+
+    .winning-message {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        font-size: 5rem;
+        flex-direction: column;
+        button {
+            font-size: 3rem;
+            background-color: $white;
+            border: 1px solid $black;
+            padding: .25em .5em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: $black;
+            color: $white;
+            border-color: $white;
+        }
+        
+    }
+    .winning-message.show {
+        display: flex;
+    }
+    
+}
