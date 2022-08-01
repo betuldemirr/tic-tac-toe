@@ -1,4 +1,4 @@
 # tic-tac-toe
-tic-tac-toe game 
+Tic-Tac-Toe Game 
 
 html / scss / javascript
