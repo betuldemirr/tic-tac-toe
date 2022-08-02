@@ -62,4 +62,6 @@ function setBoardHoverCLass() {
     }
 }
 
-function checkWin
+function checkWin() {
+    
+}
