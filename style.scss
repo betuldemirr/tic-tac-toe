@@ -11,8 +11,14 @@ $mark-size: calc($cell-size * 0.9);
     box-sizing: border-box;
 }
 
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 body {
-    margin: 0;
+    @include center;
     .board {
         width: 100vh;
         height: 100vh;
@@ -22,7 +28,6 @@ body {
         justify-items: center;
         align-items: center;
         grid-template-columns: repeat(3, auto);
-
         .cell {
             width: $cell-size;
             height: $cell-size;
@@ -109,7 +114,7 @@ body {
 
     //for space Circle cell
     .board.circle .cell:not(.x):not(.circle):hover::before,
-    .board.circle .cell:not(.x):not(.circle):hover::after  {
+    .board.circle .cell:not(.x):not(.circle):hover::after {
         content: "";
         position: absolute;
         border-radius: 50%;
@@ -142,7 +147,7 @@ body {
             font-size: 3rem;
             background-color: $white;
             border: 1px solid $black;
-            padding: .25em .5em;
+            padding: 0.25em 0.5em;
             cursor: pointer;
         }
         button:hover {
@@ -150,10 +155,8 @@ body {
             color: $white;
             border-color: $white;
         }
-        
     }
     .winning-message.show {
         display: flex;
     }
-    
 }
